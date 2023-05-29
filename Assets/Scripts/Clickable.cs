@@ -6,9 +6,20 @@ using UnityEngine.EventSystems;
 
 public class Clickable : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private Text _winText;
+    [SerializeField] private AudioSource _audio;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("YOU have it");
+        if(eventData.pointerClick.name == "TheAnswer")
+        {
+            _winText.text = "Correct";
+            _audio.Play();
+        }
+        else
+        {
+            _winText.text = "Wrong Answer";
+        }
     }
 
     // Start is called before the first frame update

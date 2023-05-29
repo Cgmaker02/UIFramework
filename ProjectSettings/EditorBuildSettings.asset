@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MathGame.unity
     guid: 74770c780d428664e9fa1873e1d02fec
+  - enabled: 1
+    path: Assets/Scenes/LettersGame.unity
+    guid: d711d64b9e15bdd419f53e5a1cb9a2f2
   m_configObjects: {}

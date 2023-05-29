@@ -2,28 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LettersManager : MonoBehaviour
 {
     [SerializeField] private Text[] _letterText;
-    private string[] _alphabet = new string[26] { "A", "B", "C", "D", "E", "F", "G", "H",
-    "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
-    "Y", "Z"};
+    [SerializeField] private AudioSource _audioClick;
+    private int[] _answers = new int[4];
+    private int _correctAnswer = 100;
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < _letterText.Length; i++)
+        for (int i = 0; i < _letterText.Length; i++)
         {
-            _letterText[i].text = _alphabet[Random.Range(0, _alphabet.Length)].ToString();
+            _letterText[i].text = Random.Range(10, 99).ToString();
+            _answers[i] = int.Parse(_letterText[i].text);
+        }
+
+        for(int i = 0; i < _answers.Length; i++)
+        {
+            if (_answers[i] < _correctAnswer)
+            {
+                _correctAnswer = _answers[i];
+            }
+        }
+        Debug.Log(_correctAnswer);
+        for(int i = 0; i < _answers.Length; i++)
+        {
+            if (_answers[i] == _correctAnswer)
+            {
+                _letterText[i].gameObject.GetComponentInParent<Image>().name = "TheAnswer";
+            }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetGame()
     {
-        
+        _audioClick.Play();
+        SceneManager.LoadScene(2);
     }
 }
